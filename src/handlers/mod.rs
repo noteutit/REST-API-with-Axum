@@ -12,6 +12,7 @@ pub async fn root() -> &'static str {
     "Intro to user project"
 }
 
+// this creates user profiles and stores them in a vector
 pub async fn create_user() -> Json<Vec<User>>{
   
   let user=User{
@@ -40,6 +41,7 @@ pub async fn create_user() -> Json<Vec<User>>{
 }
 
         
+//this is to delete a user using the user's id
 pub async fn delete_user(Path(id):Path<u32>)-> impl IntoResponse{
    unsafe{ if let Some(pos)=USERS.iter().position(|user|user.id==id){
         USERS.remove(pos);
@@ -49,6 +51,7 @@ pub async fn delete_user(Path(id):Path<u32>)-> impl IntoResponse{
 }
 }
             
+
 
 pub async fn update_user(Path(id):Path<u32>, Json(updated_user):Json<User>)-> impl IntoResponse{
     {
